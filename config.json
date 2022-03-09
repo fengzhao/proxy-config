@@ -1,0 +1,66 @@
+{
+
+"inbounds": [{
+    "port": 25490,
+    "protocol": "vmess",
+    "settings": {
+      "clients": [
+        {
+          "id": "40c8a6fd-4b0f-4431-a1e2-b63b0041e127",
+          "level": 1,
+          "alterId": 64
+        }
+      ]
+    }
+  },
+
+  {
+      "port": 8989, 
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "aes-256-gcm",
+        "ota": false, 
+        "password": "og2w51ciuLuhxr0"
+      }
+    }, 
+  {
+      "tag": "tg-in",
+      "port": 53678,
+      "protocol": "mtproto",
+      "settings": {
+        "users": [
+                  {
+                    "secret": "9d8ac1e781825f69d7d7f26a87c9244b"
+                  }
+                ]
+      }
+    }],
+  "outbounds": [{
+    "protocol": "freedom",
+    "settings": {}
+  },{
+    "protocol": "blackhole",
+    "settings": {},
+    "tag": "blocked"
+  }, {
+        "tag": "tg-out", 
+        "protocol": "mtproto", 
+        "settings": { }
+      }],
+  "routing": {
+    "rules": [
+      {
+        "type": "field",
+        "ip": ["geoip:private"],
+        "outboundTag": "blocked"
+      },
+      {
+        "type": "field",
+        "inboundTag": ["tg-in"],
+        "outboundTag": "tg-out"
+      }
+    ]
+  }
+}
+
+
