@@ -34,9 +34,10 @@
     }
   ],
   
-// 出站代理，出站流量再通过vmess协议发到远端的v2ray-server上的vmess代理
-// 可以有多个vmess服务器，也可以有多个  
+
   "outbounds": [
+    
+    // 出口协议1： 出站流量再通过vmess协议发到远端的v2ray-server上的vmess代理，可以有多个vmess服务器，也可以有多个用户
     {
       "tag": "proxy",
       "protocol": "vmess",
@@ -94,7 +95,9 @@
       }
     },
     
+  
     
+    // 出口协议2： 直接在本地出站
     {
       "tag": "direct",
       "protocol": "freedom",
@@ -106,6 +109,8 @@
       "streamSettings": null,
       "mux": null
     },
+    
+    // 出口协议3： 黑洞
     {
       "tag": "block",
       "protocol": "blackhole",
@@ -123,19 +128,15 @@
   "stats": null,
   "api": null,
   "dns": null,
+  
+  // 路由规则 
   "routing": {
     "domainStrategy": "AsIs",
     "rules": [
-      {
-        "type": "field",
-        "port": null,
-        "inboundTag": [
-          "api"
-        ],
-        "outboundTag": "api",
-        "ip": null,
-        "domain": null
-      },
+      
+
+      
+      // 规则一： 局域网私网IP通信直连(通过geoip.dat文件中来匹配)
       {
         "type": "field",
         "port": null,
@@ -146,6 +147,8 @@
         ],
         "domain": null
       },
+      
+      // 规则二：国内IP通信直连（通过geoip.dat文件中来匹配）
       {
         "type": "field",
         "port": null,
@@ -156,6 +159,8 @@
         ],
         "domain": null
       },
+      
+      // 规则三：国内域名通信直连（通过geosite.dat文件中来匹配）
       {
         "type": "field",
         "port": null,
