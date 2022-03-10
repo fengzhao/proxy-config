@@ -39,18 +39,28 @@
                 ]
       }
     }],
-  "outbounds": [{
+	
+	//出站代理
+  "outbounds": [
+  // 默认直接出站
+  {
     "protocol": "freedom",
     "settings": {}
-  },{
+  },
+	  
+  {
     "protocol": "blackhole",
     "settings": {},
     "tag": "blocked"
-  }, {
+  }, 
+	  
+      {
         "tag": "tg-out", 
         "protocol": "mtproto", 
         "settings": { }
       }],
+	
+	
   "routing": {
     "rules": [
       {
