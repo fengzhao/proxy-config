@@ -1,6 +1,17 @@
-{
+// v2ray服务端配置文件
 
-"inbounds": [{
+{
+ "log": {
+    "loglevel": "info",
+    "access": "/var/log/v2ray/access.log",   
+    "error": "/var/log/v2ray/error.log"
+  },
+    
+//入站配置    
+    
+"inbounds": [
+    // vmess协议代理
+    {
     "port": 25490,
     "protocol": "vmess",
     "settings": {
@@ -13,7 +24,7 @@
       ]
     }
   },
-
+  // shadowsocks协议代理
   {
       "port": 8989, 
       "protocol": "shadowsocks",
@@ -23,6 +34,7 @@
         "password": "og2w51ciuLuhxr0"
       }
     }, 
+  //telegram代理  
   {
       "tag": "tg-in",
       "port": 53678,
@@ -35,6 +47,8 @@
                 ]
       }
     }],
+    
+ // 出站策略，做为海外代理，所有出站正常发出去就可以  
   "outbounds": [{
     "protocol": "freedom",
     "settings": {}
